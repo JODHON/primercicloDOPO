@@ -1,0 +1,29 @@
+#BlueJ class context
+#Fri Aug 21 16:36:03 COT 2026
+comment0.target=SlotMachine
+comment0.text=\r\n Write a description of class SlotMachine here.\r\n \r\n @author (your name) \r\n @version (a version number or a date)\r\n
+comment1.target=SlotMachine()
+comment1.text=\r\n Constructor for objects of class SlotMachine\r\n
+comment10.target=java.lang.String configuration()
+comment11.target=boolean isJackpot()
+comment12.target=void makeVisible()
+comment13.target=void makeInvisible()
+comment14.target=void exit()
+comment15.target=boolean ok()
+comment16.params=y
+comment16.target=int sampleMethod(int)
+comment16.text=\r\n An example of a method - replace this comment with your own\r\n \r\n @param  y   a sample parameter for a method\r\n @return     the sum of x and y \r\n
+comment2.params=pos
+comment2.target=void addWheel(int)
+comment3.params=pos
+comment3.target=void delWheel(int)
+comment4.params=Symbol
+comment4.target=void addSymbol(java.lang.String)
+comment5.params=Symbol
+comment5.target=void delSymbol(java.lang.String)
+comment6.params=wheel Symbol
+comment6.target=void placeSymbol(int, java.lang.String)
+comment7.target=void spin()
+comment8.target=java.lang.String symbols()
+comment9.target=int disctintSymbols()
+numComments=17
