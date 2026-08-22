@@ -1,90 +1,354 @@
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
- * Write a description of class SlotMachine here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Simula una maquina tragamonedas con ruedas que muestran simbolos
+ * de colores diferentes.
+ *
+ * @author Jose
  */
 public class SlotMachine
 {
-    // instance variables - replace the example below with your own
-    private int x;
+    private ArrayList<Wheel> wheels;
+    private boolean visible;
+    private boolean ok;
+    private Rectangle jackpotIndicator;
 
     /**
-     * Constructor for objects of class SlotMachine
+     * Crea una maquina tragamonedas sin ruedas y visible.
      */
     public SlotMachine()
     {
-        // initialise instance variables
-        x = 0;
+        wheels = new ArrayList<Wheel>();
+        visible = true;
+        ok = true;
+
+        jackpotIndicator = new Rectangle();
+        jackpotIndicator.changeSize(40, 120);
+        jackpotIndicator.changeColor("yellow");
+        jackpotIndicator.moveHorizontal(-50);
+        jackpotIndicator.moveVertical(100);
     }
 
-    
-    public void addWheel(int pos){
-        
-    }
-    
-    public void delWheel(int pos){
-        
-    
-    }
-    
-    public void addSymbol(String Symbol){
-        
-    }
-    
-    public void delSymbol(String Symbol){
-        
-    }
-    
-    public void placeSymbol(int wheel, String Symbol){
-        
-    }
-    
-    public void spin(){
-        
-    }
-    
-    public String symbols(){
-        
-    }
-    
-    public int disctintSymbols(){
-        
-    }
-    
-    public String configuration(){
-        
-    }
-    
-    public boolean isJackpot(){
-        
-    }
-    
-    public void makeVisible(){
-        
-    }
-    
-    public void makeInvisible(){
-        
-    }
-    
-    public void exit(){
-        
-    }
-    
-    public boolean ok(){
-        
-    }
     /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
+     * Agrega una rueda en la posicion indicada.
+     *
+     * @param pos posicion donde insertar la rueda
      */
-    public int sampleMethod(int y)
+    public void addWheel(int pos)
     {
-        // put your code here
-        return x + y;
+        int index = clamp(pos - 1, wheels.size());
+        wheels.add(index, new Wheel());
+
+        reposition();
+        updateJackpot();
+        ok = true;
+    }
+
+    /**
+     * Elimina una rueda si existe.
+     *
+     * @param pos posicion de la rueda
+     */
+    public void delWheel(int pos)
+    {
+        int index = pos - 1;
+
+        if(index >= 0 && index < wheels.size()) {
+            Wheel wheel = wheels.remove(index);
+            wheel.makeInvisible();
+
+            reposition();
+            updateJackpot();
+            ok = true;
+        }
+        else {
+            fail("No existe una rueda en esa posicion");
+        }
+    }
+
+    /**
+     * Agrega un simbolo a todas las ruedas.
+     *
+     * @param pos posicion donde insertar el simbolo
+     * @param color color del simbolo
+     */
+    public void addSymbol(int pos, String color)
+    {
+        for(Wheel wheel : wheels) {
+            if(wheel.hasColor(color)) {
+                fail("El color " + color + " ya existe");
+                return;
+            }
+        }
+
+        for(Wheel wheel : wheels) {
+            wheel.addSymbol(pos, color);
+        }
+
+        reposition();
+        updateJackpot();
+        ok = true;
+    }
+
+    /**
+     * Elimina un simbolo de todas las ruedas.
+     *
+     * @param symbol simbolo a eliminar
+     */
+    public void delSymbol(String symbol)
+    {
+        boolean found = false;
+
+        for(Wheel wheel : wheels) {
+            if(wheel.hasColor(symbol)) {
+                found = true;
+            }
+        }
+
+        if(found) {
+            for(Wheel wheel : wheels) {
+                wheel.delSymbol(symbol);
+            }
+
+            reposition();
+            updateJackpot();
+            ok = true;
+        }
+        else {
+            fail("No existe el simbolo " + symbol);
+        }
+    }
+
+    /**
+     * Coloca un simbolo como visible en una rueda.
+     *
+     * @param wheel posicion de la rueda
+     * @param symbol simbolo que se desea mostrar
+     */
+    public void placeSymbol(int wheel, String symbol)
+    {
+        int index = wheel - 1;
+
+        if(index >= 0 && index < wheels.size()
+            && wheels.get(index).placeSymbol(symbol)) {
+
+            reposition();
+            updateJackpot();
+            ok = true;
+        }
+        else {
+            fail("No se pudo ubicar el simbolo " + symbol);
+        }
+    }
+
+    /**
+     * Gira una rueda.
+     *
+     * @param wheel posicion de la rueda
+     */
+    public void spin(int wheel)
+    {
+        int index = wheel - 1;
+
+        if(index >= 0 && index < wheels.size()) {
+            wheels.get(index).spin();
+
+            reposition();
+            updateJackpot();
+            ok = true;
+        }
+        else {
+            fail("No existe una rueda en esa posicion");
+        }
+    }
+
+    /**
+     * Gira todas las ruedas.
+     */
+    public void spin()
+    {
+        for(Wheel wheel : wheels) {
+            wheel.spin();
+        }
+
+        reposition();
+        updateJackpot();
+        ok = true;
+    }
+
+    /**
+     * Retorna los simbolos de la maquina.
+     *
+     * @return simbolos de la maquina
+     */
+    public String[] symbols()
+    {
+        if(wheels.isEmpty()) {
+            return new String[0];
+        }
+
+        return wheels.get(0).symbols();
+    }
+
+    /**
+     * Retorna la cantidad de simbolos diferentes visibles.
+     *
+     * @return cantidad de simbolos diferentes
+     */
+    public int distinctSymbols()
+    {
+        ArrayList<String> distinct = new ArrayList<String>();
+
+        for(Wheel wheel : wheels) {
+            String symbol = wheel.visibleSymbol();
+
+            if(symbol != null && !distinct.contains(symbol)) {
+                distinct.add(symbol);
+            }
+        }
+
+        return distinct.size();
+    }
+
+    /**
+     * Retorna la configuracion actual.
+     *
+     * @return configuracion de las ruedas
+     */
+    public String[] configuration()
+    {
+        String[] config = new String[wheels.size()];
+
+        for(int i = 0; i < wheels.size(); i++) {
+            config[i] = wheels.get(i).visibleSymbol();
+        }
+
+        return config;
+    }
+
+    /**
+     * Determina si la configuracion es ganadora.
+     *
+     * @return true si todas las ruedas muestran el mismo simbolo
+     */
+    public boolean isJackpot()
+    {
+        if(wheels.isEmpty()) {
+            return false;
+        }
+
+        for(Wheel wheel : wheels) {
+            if(wheel.visibleSymbol() == null) {
+                return false;
+            }
+        }
+
+        return distinctSymbols() == 1;
+    }
+
+    /**
+     * Hace visible la maquina.
+     */
+    public void makeVisible()
+    {
+        visible = true;
+
+        reposition();
+        updateJackpot();
+    }
+
+    /**
+     * Hace invisible la maquina.
+     */
+    public void makeInvisible()
+    {
+        visible = false;
+
+        for(Wheel wheel : wheels) {
+            wheel.makeInvisible();
+        }
+
+        jackpotIndicator.makeInvisible();
+    }
+
+    /**
+     * Termina el simulador.
+     */
+    public void exit()
+    {
+        makeInvisible();
+    }
+
+    /**
+     * Indica si la ultima operacion fue exitosa.
+     *
+     * @return true si la ultima operacion fue exitosa
+     */
+    public boolean ok()
+    {
+        return ok;
+    }
+
+    /**
+     * Reposiciona las ruedas.
+     */
+    private void reposition()
+    {
+        for(int i = 0; i < wheels.size(); i++) {
+            if(visible) {
+                wheels.get(i).makeVisible(i + 1);
+            }
+            else {
+                wheels.get(i).updateAppearance(i + 1);
+            }
+        }
+    }
+
+    /**
+     * Actualiza la apariencia del indicador de jackpot.
+     */
+    private void updateJackpot()
+    {
+        if(visible && isJackpot()) {
+            jackpotIndicator.makeVisible();
+        }
+        else {
+            jackpotIndicator.makeInvisible();
+        }
+    }
+
+    /**
+     * Ajusta un indice a los limites validos.
+     *
+     * @param index indice
+     * @param max limite superior
+     * @return indice ajustado
+     */
+    private int clamp(int index, int max)
+    {
+        if(index < 0) {
+            return 0;
+        }
+
+        if(index > max) {
+            return max;
+        }
+
+        return index;
+    }
+
+    /**
+     * Marca la ultima operacion como fallida.
+     *
+     * @param message mensaje que se mostrara al usuario
+     */
+    private void fail(String message)
+    {
+        ok = false;
+
+        if(visible) {
+            JOptionPane.showMessageDialog(null, message);
+        }
     }
 }
