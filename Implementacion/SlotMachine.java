@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,7 +13,11 @@ public class SlotMachine
     private ArrayList<Wheel> wheels;
     private boolean visible;
     private boolean ok;
-    private Rectangle jackpotIndicator;
+    private Rectangle jackpotBaner;
+    private ArrayList<Circle> jackpotLights;
+    private String[] jackpotColors;
+    private Random random;
+
 
     /**
      * Crea una maquina tragamonedas sin ruedas y visible.
@@ -22,12 +27,26 @@ public class SlotMachine
         wheels = new ArrayList<Wheel>();
         visible = true;
         ok = true;
+        
+        
+        jackpotColors= new String[]{"red","yellow","green"};
+        random=new Random();
 
-        jackpotIndicator = new Rectangle();
-        jackpotIndicator.changeSize(40, 120);
-        jackpotIndicator.changeColor("yellow");
-        jackpotIndicator.moveHorizontal(-50);
-        jackpotIndicator.moveVertical(100);
+        jackpotBaner = new Rectangle();
+        jackpotBaner.changeSize(40, 150);
+        jackpotBaner.changeColor("yellow");
+        jackpotBaner.moveHorizontal(-75);
+        jackpotBaner.moveVertical(100);
+        
+        jackpotLights=new ArrayList<Circle>();
+        for (int i =0;i<4;i++){
+            Circle light=new Circle();
+            light.changeColor("red");
+            light.changeSize(20);
+            light.moveHorizontal(-60+i*40);
+            light.moveVertical(80);
+            jackpotLights.add(light);
+        }
     }
 
     /**
@@ -156,6 +175,7 @@ public class SlotMachine
 
             reposition();
             updateJackpot();
+            celebrate();
             ok = true;
         }
         else {
@@ -174,6 +194,7 @@ public class SlotMachine
 
         reposition();
         updateJackpot();
+        celebrate();
         ok = true;
     }
 
@@ -269,7 +290,7 @@ public class SlotMachine
             wheel.makeInvisible();
         }
 
-        jackpotIndicator.makeInvisible();
+        hideJackpot();
     }
 
     /**
@@ -311,12 +332,57 @@ public class SlotMachine
     private void updateJackpot()
     {
         if(visible && isJackpot()) {
-            jackpotIndicator.makeVisible();
+            showJackpot();
         }
         else {
-            jackpotIndicator.makeInvisible();
+            hideJackpot();
         }
     }
+
+    /*Muestra el jackpot */
+    
+    private void showJackpot(){
+    
+    jackpotBaner.makeVisible();
+    
+    for(Circle light:jackpotLights){
+    
+        light.makeVisible();
+    }
+    }
+
+    /*Esconde el jackpot */
+    
+    private void hideJackpot(){
+        jackpotBaner.makeInvisible();
+        
+        for(Circle light:jackpotLights){
+            light.makeInvisible();
+        }
+    }
+
+    /*Cuando se gana el jackpot */
+    
+    private void  celebrate(){
+        if(!visible || !isJackpot()){
+            return;
+        }
+        
+        for (int i=0;i<6;i++){
+            jackpotBaner.changeColor(randomColor());
+        
+            for(Circle light:jackpotLights){
+                light.changeColor(randomColor());
+                light.moveVertical(i%2==0 ? -5:5);
+            }
+        }
+        JOptionPane.showMessageDialog(null,"Has ganado");
+    }
+    
+    private String randomColor(){
+        return jackpotColors[random.nextInt(jackpotColors.length)];
+    }
+    
 
     /**
      * Ajusta un indice a los limites validos.

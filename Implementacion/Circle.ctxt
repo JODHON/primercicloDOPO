@@ -1,14 +1,18 @@
 #BlueJ class context
-#Fri Aug 21 21:44:24 COT 2026
+#Sat Aug 22 13:27:55 COT 2026
 comment0.target=Circle
-comment0.text=\r\n A Circle that can be manipulated and that draws itself on a canvas.\r\n \r\n @author  Michael Kolling and David J. Barnes (Modified)\r\n @version 1.0  (15 July 2000)()\r\n
+comment0.text=\n A Circle that can be manipulated and that draws itself on a canvas.\n \n @author  Michael Kolling and David J. Barnes (Modified)\n @version 1.0  (15 July 2000)()\n
 comment1.target=Circle()
-comment2.target=void makeVisible()
-comment3.target=void makeInvisible()
-comment4.params=distance
-comment4.target=void moveHorizontal(int)
-comment5.params=newColor
-comment5.target=void changeColor(java.lang.String)
-comment6.target=void draw()
-comment7.target=void erase()
-numComments=8
+comment2.params=newDiameter
+comment2.target=void changeSize(int)
+comment3.target=void makeVisible()
+comment4.target=void makeInvisible()
+comment5.params=distance
+comment5.target=void moveVertical(int)
+comment6.params=distance
+comment6.target=void moveHorizontal(int)
+comment7.params=newColor
+comment7.target=void changeColor(java.lang.String)
+comment8.target=void draw()
+comment9.target=void erase()
+numComments=10

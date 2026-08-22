@@ -24,6 +24,13 @@ public class Circle
         color = "blue";
         isVisible = false;
     }
+    
+    public void changeSize(int newDiameter) {
+        erase();
+        diameter = newDiameter;
+
+        draw();
+    }
 
     public void makeVisible()
     {
@@ -35,6 +42,12 @@ public class Circle
     {
         erase();
         isVisible = false;
+    }
+    
+    public void moveVertical(int distance){
+        erase();
+        yPosition += distance;
+        draw();
     }
 
     public void moveHorizontal(int distance)
