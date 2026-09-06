@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Random;
-
 /**
  * Representa una rueda de la maquina tragamonedas.
  *
@@ -14,12 +13,10 @@ public class Wheel
     private Circle symbol;
     private int xPos;
     private boolean symbolPlaced;
-
+    private boolean locked;
     private static final int SPACING = 60;
     private static final int MARGIN_X = 50;
-
     private static Random random = new Random();
-
     /**
      * Crea una rueda vacia.
      */
@@ -30,9 +27,9 @@ public class Wheel
         visible = false;
         symbol = new Circle();
         symbolPlaced=false;
+        locked = false;
         xPos = 0;
     }
-
     /**
      * Agrega un simbolo en una posicion.
      *
@@ -50,7 +47,6 @@ public void addSymbol(int pos, String color)
     }
     symbols.add(index, color);
 }
-
     /**
      * Elimina un simbolo.
      *
@@ -62,7 +58,6 @@ public void delSymbol(String color)
     if(idx != -1) {
         boolean wasVisible = symbolPlaced && idx == visibleIndex;
         symbols.remove(idx);
-
         if(symbols.isEmpty()) {
             visibleIndex = 0;
             symbolPlaced = false;
@@ -73,13 +68,11 @@ public void delSymbol(String color)
         else if(visibleIndex >= symbols.size()) {
             visibleIndex = symbols.size() - 1;
         }
-
         if(wasVisible) {
             symbolPlaced = false;
         }
     }
 }
-
     /**
      * Gira la rueda y selecciona un simbolo aleatorio.
      */
@@ -89,6 +82,37 @@ public void spin()
         visibleIndex = random.nextInt(symbols.size());
         symbolPlaced=true;
         symbol.changeColor(symbols.get(visibleIndex));
+    }
+}
+    /**
+     * Gira la rueda avanzando un numero de pasos sobre sus simbolos.
+     * Si la rueda esta visible, cada paso se muestra de forma secuencial.
+     *
+     * @param steps numero de pasos a avanzar
+     */
+public void spin(int steps)
+{
+    if(symbols.isEmpty()) {
+        return;
+    }
+
+    if(!symbolPlaced) {
+        visibleIndex = 0;
+        symbolPlaced = true;
+    }
+
+    for(int i = 0; i < steps; i++) {
+        visibleIndex = (visibleIndex + 1) % symbols.size();
+        symbol.changeColor(symbols.get(visibleIndex));
+
+        if(visible) {
+            try {
+                Thread.sleep(150);
+            }
+            catch(InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
     }
 }
     /**
@@ -108,7 +132,6 @@ public boolean placeSymbol(String color)
     }
     return false;
 }
-
     /**
      * Retorna el simbolo actualmente visible.
      *
@@ -121,7 +144,6 @@ public String visibleSymbol()
     }
     return symbols.get(visibleIndex);
 }
-
     /**
      * Retorna todos los simbolos.
      *
@@ -131,7 +153,6 @@ public String visibleSymbol()
     {
         return symbols.toArray(new String[0]);
     }
-
     /**
      * Comprueba si existe un color.
      *
@@ -142,7 +163,29 @@ public String visibleSymbol()
     {
         return symbols.contains(color);
     }
-
+    /**
+     * Fija la rueda para que no gire.
+     */
+    public void lock()
+    {
+        locked = true;
+    }
+    /**
+     * Suelta la rueda para que pueda volver a girar.
+     */
+    public void unlock()
+    {
+        locked = false;
+    }
+    /**
+     * Indica si la rueda esta fija.
+     *
+     * @return true si la rueda esta fija
+     */
+    public boolean isLocked()
+    {
+        return locked;
+    }
     /**
      * Actualiza la posicion y color del simbolo.
      *
@@ -153,12 +196,10 @@ public String visibleSymbol()
     int targetX = MARGIN_X + (wheelPos - 1) * SPACING;
     symbol.moveHorizontal(targetX - xPos);
     xPos = targetX;
-
     if(symbolPlaced) {
         symbol.changeColor(symbols.get(visibleIndex));
     }
 }
-
     /**
      * Hace visible la rueda.
      *
@@ -167,11 +208,9 @@ public String visibleSymbol()
     public void makeVisible(int wheelPos)
     {
         visible = true;
-
         updateAppearance(wheelPos);
         symbol.makeVisible();
     }
-
     /**
      * Hace invisible la rueda.
      */

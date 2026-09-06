@@ -1,7 +1,7 @@
 #BlueJ class context
-#Sat Aug 22 13:27:55 COT 2026
+#Sun Sep 06 15:14:16 COT 2026
 comment0.target=Circle
-comment0.text=\n A Circle that can be manipulated and that draws itself on a canvas.\n \n @author  Michael Kolling and David J. Barnes (Modified)\n @version 1.0  (15 July 2000)()\n
+comment0.text=\r\n A Circle that can be manipulated and that draws itself on a canvas.\r\n \r\n @author  Michael Kolling and David J. Barnes (Modified)\r\n @version 1.0  (15 July 2000)()\r\n
 comment1.target=Circle()
 comment2.params=newDiameter
 comment2.target=void changeSize(int)

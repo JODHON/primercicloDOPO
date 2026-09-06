@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import javax.swing.JOptionPane;
 
@@ -87,6 +88,67 @@ public class SlotMachine
     }
 
     /**
+     * Intercambia la posicion de dos ruedas.
+     *
+     * @param wheel1 posicion de la primera rueda
+     * @param wheel2 posicion de la segunda rueda
+     */
+    public void swap(int wheel1, int wheel2)
+    {
+        int index1 = wheel1 - 1;
+        int index2 = wheel2 - 1;
+
+        if(index1 >= 0 && index1 < wheels.size()
+            && index2 >= 0 && index2 < wheels.size()) {
+
+            Collections.swap(wheels, index1, index2);
+
+            reposition();
+            updateJackpot();
+            ok = true;
+        }
+        else {
+            fail("No existen ruedas en esas posiciones");
+        }
+    }
+
+    /**
+     * Fija una rueda para que no gire.
+     *
+     * @param wheel posicion de la rueda
+     */
+    public void lock(int wheel)
+    {
+        int index = wheel - 1;
+
+        if(index >= 0 && index < wheels.size() && !wheels.get(index).isLocked()) {
+            wheels.get(index).lock();
+            ok = true;
+        }
+        else {
+            fail("No se pudo fijar la rueda " + wheel);
+        }
+    }
+
+    /**
+     * Suelta una rueda previamente fijada.
+     *
+     * @param wheel posicion de la rueda
+     */
+    public void unlock(int wheel)
+    {
+        int index = wheel - 1;
+
+        if(index >= 0 && index < wheels.size() && wheels.get(index).isLocked()) {
+            wheels.get(index).unlock();
+            ok = true;
+        }
+        else {
+            fail("No se pudo soltar la rueda " + wheel);
+        }
+    }
+
+    /**
      * Agrega un simbolo a todas las ruedas.
      *
      * @param pos posicion donde insertar el simbolo
@@ -170,7 +232,7 @@ public class SlotMachine
     {
         int index = wheel - 1;
 
-        if(index >= 0 && index < wheels.size()) {
+        if(index >= 0 && index < wheels.size() && !wheels.get(index).isLocked()) {
             wheels.get(index).spin();
 
             reposition();
@@ -179,17 +241,75 @@ public class SlotMachine
             ok = true;
         }
         else {
-            fail("No existe una rueda en esa posicion");
+            fail("No existe una rueda en esa posicion o esta fija");
         }
     }
 
     /**
-     * Gira todas las ruedas.
+     * Gira una rueda un numero determinado de pasos.
+     *
+     * @param wheel posicion de la rueda
+     * @param steps numero de pasos a girar
+     */
+    public void spin(int wheel, int steps)
+    {
+        int index = wheel - 1;
+
+        if(index >= 0 && index < wheels.size()
+            && !wheels.get(index).isLocked() && steps >= 0) {
+
+            wheels.get(index).spin(steps);
+
+            reposition();
+            updateJackpot();
+            celebrate();
+            ok = true;
+        }
+        else {
+            fail("No se pudo girar la rueda " + wheel);
+        }
+    }
+
+    /**
+     * Gira todas las ruedas que no esten fijas.
      */
     public void spin()
     {
         for(Wheel wheel : wheels) {
-            wheel.spin();
+            if(!wheel.isLocked()) {
+                wheel.spin();
+            }
+        }
+
+        reposition();
+        updateJackpot();
+        celebrate();
+        ok = true;
+    }
+
+    /**
+     * Deja la maquina en la configuracion dada, respetando las ruedas fijas.
+     *
+     * @param setSymbols simbolo deseado para cada rueda
+     */
+    public void spin(String[] setSymbols)
+    {
+        if(setSymbols.length != wheels.size()) {
+            fail("La configuracion no coincide con el numero de ruedas");
+            return;
+        }
+
+        for(int i = 0; i < wheels.size(); i++) {
+            if(!wheels.get(i).isLocked() && !wheels.get(i).hasColor(setSymbols[i])) {
+                fail("El simbolo " + setSymbols[i] + " no existe en la rueda " + (i + 1));
+                return;
+            }
+        }
+
+        for(int i = 0; i < wheels.size(); i++) {
+            if(!wheels.get(i).isLocked()) {
+                wheels.get(i).placeSymbol(setSymbols[i]);
+            }
         }
 
         reposition();
