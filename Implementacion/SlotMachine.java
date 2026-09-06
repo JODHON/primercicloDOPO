@@ -29,7 +29,7 @@ public class SlotMachine
         ok = true;
         
         
-        jackpotColors= new String[]{"red","yellow","green"};
+        jackpotColors= new String[]{"red","yellow","green","blue"};
         random=new Random();
 
         jackpotBaner = new Rectangle();
@@ -253,21 +253,18 @@ public class SlotMachine
      *
      * @return true si todas las ruedas muestran el mismo simbolo
      */
-    public boolean isJackpot()
-    {
-        if(wheels.isEmpty()) {
+public boolean isJackpot()
+{
+    if(wheels.size() < 2) {
+        return false;
+    }
+    for(Wheel wheel : wheels) {
+        if(wheel.visibleSymbol() == null) {
             return false;
         }
-
-        for(Wheel wheel : wheels) {
-            if(wheel.visibleSymbol() == null) {
-                return false;
-            }
-        }
-
-        return distinctSymbols() == 1;
     }
-
+    return distinctSymbols() == 1;
+}
     /**
      * Hace visible la maquina.
      */

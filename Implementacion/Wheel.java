@@ -13,6 +13,7 @@ public class Wheel
     private boolean visible;
     private Circle symbol;
     private int xPos;
+    private boolean symbolPlaced;
 
     private static final int SPACING = 60;
     private static final int MARGIN_X = 50;
@@ -28,6 +29,7 @@ public class Wheel
         visibleIndex = 0;
         visible = false;
         symbol = new Circle();
+        symbolPlaced=false;
         xPos = 0;
     }
 
@@ -37,83 +39,88 @@ public class Wheel
      * @param pos posicion del simbolo
      * @param color color del simbolo
      */
-    public void addSymbol(int pos, String color)
-    {
-        int index = pos - 1;
-
-        if(index < 0) {
-            index = 0;
-        }
-
-        if(index > symbols.size()) {
-            index = symbols.size();
-        }
-
-        symbols.add(index, color);
+public void addSymbol(int pos, String color)
+{
+    int index = pos - 1;
+    if(index < 0) {
+        index = 0;
     }
+    if(index > symbols.size()) {
+        index = symbols.size();
+    }
+    symbols.add(index, color);
+}
 
     /**
      * Elimina un simbolo.
      *
      * @param color color del simbolo
      */
-    public void delSymbol(String color)
-    {
-        int idx = symbols.indexOf(color);
+public void delSymbol(String color)
+{
+    int idx = symbols.indexOf(color);
+    if(idx != -1) {
+        boolean wasVisible = symbolPlaced && idx == visibleIndex;
+        symbols.remove(idx);
 
-        if(idx != -1) {
-            symbols.remove(idx);
+        if(symbols.isEmpty()) {
+            visibleIndex = 0;
+            symbolPlaced = false;
+        }
+        else if(idx < visibleIndex) {
+            visibleIndex--;
+        }
+        else if(visibleIndex >= symbols.size()) {
+            visibleIndex = symbols.size() - 1;
+        }
 
-            if(symbols.isEmpty()) {
-                visibleIndex = 0;
-            }
-            else if(visibleIndex >= symbols.size()) {
-                visibleIndex = symbols.size() - 1;
-            }
+        if(wasVisible) {
+            symbolPlaced = false;
         }
     }
+}
 
     /**
      * Gira la rueda y selecciona un simbolo aleatorio.
      */
-    public void spin()
-    {
-        if(!symbols.isEmpty()) {
-            visibleIndex = random.nextInt(symbols.size());
-        }
+public void spin()
+{
+    if(!symbols.isEmpty()) {
+        visibleIndex = random.nextInt(symbols.size());
+        symbolPlaced=true;
+        symbol.changeColor(symbols.get(visibleIndex));
     }
-
+}
     /**
      * Coloca un simbolo como visible.
      *
      * @param color color del simbolo
      * @return true si el simbolo existe
      */
-    public boolean placeSymbol(String color)
-    {
-        int idx = symbols.indexOf(color);
-
-        if(idx != -1) {
-            visibleIndex = idx;
-            return true;
-        }
-
-        return false;
+public boolean placeSymbol(String color)
+{
+    int idx = symbols.indexOf(color);
+    if(idx != -1) {
+        visibleIndex = idx;
+        symbolPlaced = true;
+        symbol.changeColor(color);
+        return true;
     }
+    return false;
+}
 
     /**
      * Retorna el simbolo actualmente visible.
      *
      * @return simbolo visible
      */
-    public String visibleSymbol()
-    {
-        if(symbols.isEmpty()) {
-            return null;
-        }
-
-        return symbols.get(visibleIndex);
+public String visibleSymbol()
+{
+    if(!symbolPlaced ||symbols.isEmpty()) {
+        return null;
     }
+    return symbols.get(visibleIndex);
+}
 
     /**
      * Retorna todos los simbolos.
@@ -142,16 +149,15 @@ public class Wheel
      * @param wheelPos posicion de la rueda
      */
     public void updateAppearance(int wheelPos)
-    {
-        if(!symbols.isEmpty()) {
-            int targetX = MARGIN_X + (wheelPos - 1) * SPACING;
+{
+    int targetX = MARGIN_X + (wheelPos - 1) * SPACING;
+    symbol.moveHorizontal(targetX - xPos);
+    xPos = targetX;
 
-            symbol.changeColor(symbols.get(visibleIndex));
-            symbol.moveHorizontal(targetX - xPos);
-
-            xPos = targetX;
-        }
+    if(symbolPlaced) {
+        symbol.changeColor(symbols.get(visibleIndex));
     }
+}
 
     /**
      * Hace visible la rueda.

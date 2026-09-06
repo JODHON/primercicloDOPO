@@ -1,5 +1,5 @@
 #BlueJ class context
-#Sat Aug 22 13:29:29 COT 2026
+#Sun Sep 06 12:34:31 COT 2026
 comment0.target=SlotMachine
 comment0.text=\n Simula una maquina tragamonedas con ruedas que muestran simbolos\n de colores diferentes.\n\n @author Jose\n
 comment1.target=SlotMachine()
@@ -23,11 +23,14 @@ comment17.text=\n Reposiciona las ruedas.\n
 comment18.target=void updateJackpot()
 comment18.text=\n Actualiza la apariencia del indicador de jackpot.\n
 comment19.target=void showJackpot()
+comment19.text=Muestra el jackpot
 comment2.params=pos
 comment2.target=void addWheel(int)
 comment2.text=\n Agrega una rueda en la posicion indicada.\n\n @param pos posicion donde insertar la rueda\n
 comment20.target=void hideJackpot()
+comment20.text=Esconde el jackpot
 comment21.target=void celebrate()
+comment21.text=Cuando se gana el jackpot
 comment22.target=java.lang.String randomColor()
 comment23.params=index max
 comment23.target=int clamp(int, int)
