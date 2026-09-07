@@ -250,4 +250,29 @@ public class SlotMachineC2Test
 
         assertFalse(machine.ok());
     }
+    
+    // -------------------- isJackpot ----------
+    
+    @Test
+    public void accordingCGIsJackpotShouldBeFalseWithOnlyOneWheelEvenIfSymbolIsSet()
+    {
+        machine.addWheel(1);
+        machine.addSymbol(1, "red");
+        machine.placeSymbol(1, "red");
+
+        assertFalse(machine.isJackpot());
+    }
+
+    // ---------- addSymbol ----------
+
+    @Test
+    public void accordingCGAddSymbolShouldFailWhenColorAlreadyExists()
+    {
+        machine.addWheel(1);
+        machine.addSymbol(1, "red");
+
+        machine.addSymbol(1, "red");
+
+        assertFalse(machine.ok());
+    }
 }

@@ -1,7 +1,7 @@
 #BlueJ class context
-#Sun Sep 06 18:45:01 COT 2026
+#Sun Sep 06 20:29:13 COT 2026
 comment0.target=SlotMachineC2Test
-comment0.text=\n Pruebas de unidad del ciclo 2\: intercambiar ruedas, fijar/soltar ruedas,\n girar por pasos y dejar la maquina en una configuracion dada.\n\n Las pruebas se ejecutan con la maquina en modo invisible.\n\n @author Jose\n
+comment0.text=\r\n Pruebas de unidad del ciclo 2\: intercambiar ruedas, fijar/soltar ruedas,\r\n girar por pasos y dejar la maquina en una configuracion dada.\r\n\r\n Las pruebas se ejecutan con la maquina en modo invisible.\r\n\r\n @author Jose\r\n
 comment1.target=void setUp()
 comment10.target=void spinWithStepsShouldFailOnLockedWheel()
 comment11.target=void spinWithStepsShouldFailWithNegativeSteps()
@@ -12,7 +12,9 @@ comment15.target=void spinWithConfigurationShouldFailWhenSymbolDoesNotExist()
 comment16.target=void spinWithConfigurationShouldNotChangeLockedWheels()
 comment17.target=void spinAllShouldNotChangeLockedWheelSymbol()
 comment18.target=void spinSingleShouldFailWhenWheelIsLocked()
+comment19.target=void accordingCGIsJackpotShouldBeFalseWithOnlyOneWheelEvenIfSymbolIsSet()
 comment2.target=void swapShouldExchangePositionsOfTwoValidWheels()
+comment20.target=void accordingCGAddSymbolShouldFailWhenColorAlreadyExists()
 comment3.target=void swapShouldFailWithInvalidWheelPosition()
 comment4.target=void lockShouldPreventLockedWheelFromSpinning()
 comment5.target=void lockShouldFailWhenWheelIsAlreadyLocked()
@@ -20,4 +22,4 @@ comment6.target=void lockShouldFailWithInvalidWheelPosition()
 comment7.target=void unlockShouldAllowWheelToSpinAgain()
 comment8.target=void unlockShouldFailWhenWheelIsNotLocked()
 comment9.target=void spinWithStepsShouldAdvanceVisibleSymbolByGivenSteps()
-numComments=19
+numComments=21
