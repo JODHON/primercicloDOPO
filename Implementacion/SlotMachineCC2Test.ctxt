@@ -1,0 +1,8 @@
+#BlueJ class context
+#Sun Sep 06 18:44:49 COT 2026
+comment0.target=SlotMachineCC2Test
+comment0.text=\n Pruebas de unidad del ciclo 1\: agregar/eliminar ruedas y simbolos,\n y deteccion de jackpot.\n\n Las pruebas se ejecutan con la maquina en modo invisible.\n\n @author Andres\n
+comment1.target=void setUp()
+comment2.target=void accordingCGIsJackpotShouldBeFalseWithOnlyOneWheelEvenIfSymbolIsSet()
+comment3.target=void accordingCGAddSymbolShouldFailWhenColorAlreadyExists()
+numComments=4
