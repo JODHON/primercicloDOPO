@@ -1,5 +1,5 @@
 #BlueJ class context
-#Sun Sep 06 20:29:13 COT 2026
+#Sun Sep 20 18:21:38 COT 2026
 comment0.target=SlotMachineC2Test
 comment0.text=\r\n Pruebas de unidad del ciclo 2\: intercambiar ruedas, fijar/soltar ruedas,\r\n girar por pasos y dejar la maquina en una configuracion dada.\r\n\r\n Las pruebas se ejecutan con la maquina en modo invisible.\r\n\r\n @author Jose\r\n
 comment1.target=void setUp()

@@ -66,48 +66,50 @@ public int[][] solve(int n)
      * al final el valor de k alcanzado (1 = exito).
      */
     public void simulate(int n)
-{
-    SlotMachine machine = new SlotMachine(n);
-    machine.makeVisible();
-
-    int wheelCount = machine.wheelCount();
-    int k = machine.distinctSymbols();
-    boolean jackpotReached = (k == 1);
-
-    for(int pass = 0; pass < max_passes && k > 1 && !jackpotReached; pass++) {
-        for(int wheel = 2; wheel <= wheelCount && k > 1 && !jackpotReached; wheel++) {
-
-            int bestStep = 0;
-            int bestK = k;
-
-            for(int step = 1; step < wheelCount && k > 1 && !jackpotReached; step++) {
-                machine.rotate(wheel, 1);
-                System.out.println(wheel + " " + 1);
-
-                k = machine.distinctSymbols();
-                if(k < bestK) {
-                    bestK = k;
-                    bestStep = step;
-                }
-            }
-
-            if(!jackpotReached) {
-                int back = -((wheelCount - 1) - bestStep);
-                if(back != 0) {
-                    machine.rotate(wheel, back);
-                    System.out.println(wheel + " " + back);
+    {
+        SlotMachine machine = new SlotMachine(n);
+        machine.makeVisible();
+ 
+        int k = machine.distinctSymbols();
+        boolean jackpotReached = (k == 1);
+ 
+        for(int pass = 0; pass < max_passes && k > 1 && !jackpotReached; pass++) {
+            for(int wheel = 2; wheel <= n && k > 1 && !jackpotReached; wheel++) {
+ 
+                int bestStep = 0;
+                int bestK = k;
+ 
+                for(int step = 1; step < n && k > 1 && !jackpotReached; step++) {
+                    machine.spin(wheel, 1);
+                    System.out.println(wheel + " " + 1);
+ 
                     k = machine.distinctSymbols();
+                    if(k == 1) {
+                        jackpotReached = true;
+                    }
+                    else if(k < bestK) {
+                        bestK = k;
+                        bestStep = step;
+                    }
                 }
-
-                if(k == 1) {
-                    jackpotReached = true;
+ 
+                if(!jackpotReached) {
+                    int back = -((n - 1) - bestStep);
+                    if(back != 0) {
+                        machine.spin(wheel, back + n);
+                        System.out.println(wheel + " " + back);
+ 
+                        k = machine.distinctSymbols();
+                        if(k == 1) {
+                            jackpotReached = true;
+                        }
+                    }
                 }
             }
         }
+ 
+        System.out.println(k);
     }
-
-    System.out.println(k);
-}
 
 /**
  * Lee la entrada y ejecuta la solucion

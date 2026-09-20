@@ -1,5 +1,5 @@
 #BlueJ class context
-#Sun Sep 06 20:29:13 COT 2026
+#Sun Sep 20 18:21:38 COT 2026
 comment0.target=Wheel
 comment0.text=\r\n Representa una rueda de la maquina tragamonedas.\r\n\r\n @author Jose\r\n
 comment1.target=Wheel()
@@ -18,6 +18,8 @@ comment14.target=void makeVisible(int)
 comment14.text=\r\n Hace visible la rueda.\r\n\r\n @param wheelPos posicion de la rueda\r\n
 comment15.target=void makeInvisible()
 comment15.text=\r\n Hace invisible la rueda.\r\n
+comment16.params=steps
+comment16.target=void rotate(int)
 comment2.params=pos color
 comment2.target=void addSymbol(int, java.lang.String)
 comment2.text=\r\n Agrega un simbolo en una posicion.\r\n\r\n @param pos posicion del simbolo\r\n @param color color del simbolo\r\n
@@ -39,4 +41,4 @@ comment8.text=\r\n Retorna todos los simbolos.\r\n\r\n @return simbolos\r\n
 comment9.params=color
 comment9.target=boolean hasColor(java.lang.String)
 comment9.text=\r\n Comprueba si existe un color.\r\n\r\n @param color color a buscar\r\n @return true si existe\r\n
-numComments=16
+numComments=17

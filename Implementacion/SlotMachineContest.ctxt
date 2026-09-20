@@ -1,0 +1,13 @@
+#BlueJ class context
+#Sun Sep 20 18:21:38 COT 2026
+comment0.target=SlotMachineContest
+comment1.params=n
+comment1.target=int[][] solve(int)
+comment1.text=\r\n Resuelve el problema interactivo\: lee k de System.in y escribe\r\n las acciones (i j) en System.out hasta que k \=\= 1.\r\n
+comment2.params=n
+comment2.target=void simulate(int)
+comment2.text=\r\n Simulacion local usando una SlotMachine propia \r\n al final el valor de k alcanzado (1 \= exito).\r\n
+comment3.params=args
+comment3.target=void main(java.lang.String[])
+comment3.text=\r\n Lee la entrada y ejecuta la solucion\r\n
+numComments=4
