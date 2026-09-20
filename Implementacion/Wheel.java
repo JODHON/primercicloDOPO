@@ -219,4 +219,14 @@ public String visibleSymbol()
         visible = false;
         symbol.makeInvisible();
     }
+
+    public void rotate(int steps)
+    {
+        if(!symbols.isEmpty()) {
+            int n = symbols.size();
+            visibleIndex = ((visibleIndex + steps) % n + n) % n;
+            symbolPlaced = true;
+            symbol.changeColor(symbols.get(visibleIndex));
+        }
+    }
 }

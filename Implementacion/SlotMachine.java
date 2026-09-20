@@ -18,6 +18,7 @@ public class SlotMachine
     private ArrayList<Circle> jackpotLights;
     private String[] jackpotColors;
     private Random random;
+    private static final String[] symbol_colors={"red","blue","green","yellow","black","magenta","orange"};
 
 
     /**
@@ -48,6 +49,25 @@ public class SlotMachine
             light.moveVertical(80);
             jackpotLights.add(light);
         }
+    }
+    
+    /**
+     * Crea una slotmachine de n ruedas y n symbolos
+    */
+
+    public SlotMachine(int n)
+    {
+        this();
+
+        for(int i = 1; i <= n; i++) {
+            addWheel(i);
+        }
+
+        for(int i = 1; i <= n; i++) {
+            addSymbol(i, symbol_colors[i - 1]);
+        }
+
+        spin();
     }
 
     /**
@@ -533,5 +553,23 @@ public boolean isJackpot()
         if(visible) {
             JOptionPane.showMessageDialog(null, message);
         }
+    }
+
+    /** Mira que rueda es la que va a rotar
+     * 
+    */
+    
+    public void rotate(int wheel, int steps)
+    {
+    wheels.get(wheel - 1).rotate(steps);
+    }
+
+    /** CUenta las ruedas que tiene la maquina
+     * 
+    */
+
+    public int wheelCount()
+    {
+    return wheels.size();
     }
 }
