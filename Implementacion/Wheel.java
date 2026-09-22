@@ -7,7 +7,7 @@ import java.util.Random;
  */
 public class Wheel
 {
-    private ArrayList<String> symbols;
+    private static ArrayList<String> symbols = new ArrayList<String>();
     private int visibleIndex;
     private boolean visible;
     private Circle symbol;
@@ -17,16 +17,13 @@ public class Wheel
     private static final int SPACING = 60;
     private static final int MARGIN_X = 50;
     private static Random random = new Random();
-    /**
-     * Crea una rueda vacia.
-     */
+
     public Wheel()
     {
-        symbols = new ArrayList<String>();
         visibleIndex = 0;
         visible = false;
         symbol = new Circle();
-        symbolPlaced=false;
+        symbolPlaced = false;
         locked = false;
         xPos = 0;
     }

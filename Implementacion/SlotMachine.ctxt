@@ -1,5 +1,5 @@
 #BlueJ class context
-#Sun Sep 20 18:21:38 COT 2026
+#Tue Sep 22 18:24:02 COT 2026
 comment0.target=SlotMachine
 comment0.text=\r\n Simula una maquina tragamonedas con ruedas que muestran simbolos\r\n de colores diferentes.\r\n\r\n @author Jose\r\n
 comment1.target=SlotMachine()

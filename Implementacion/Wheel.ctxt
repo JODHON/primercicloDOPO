@@ -1,9 +1,8 @@
 #BlueJ class context
-#Sun Sep 20 18:21:38 COT 2026
+#Tue Sep 22 18:24:02 COT 2026
 comment0.target=Wheel
 comment0.text=\r\n Representa una rueda de la maquina tragamonedas.\r\n\r\n @author Jose\r\n
 comment1.target=Wheel()
-comment1.text=\r\n Crea una rueda vacia.\r\n
 comment10.target=void lock()
 comment10.text=\r\n Fija la rueda para que no gire.\r\n
 comment11.target=void unlock()

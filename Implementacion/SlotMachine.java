@@ -176,17 +176,15 @@ public class SlotMachine
      */
     public void addSymbol(int pos, String color)
     {
-        for(Wheel wheel : wheels) {
-            if(wheel.hasColor(color)) {
-                fail("El color " + color + " ya existe");
-                return;
-            }
+        Wheel ref = wheels.isEmpty() ? new Wheel() : wheels.get(0);
+    
+        if(ref.hasColor(color)) {
+            fail("El color " + color + " ya existe");
+            return;
         }
-
-        for(Wheel wheel : wheels) {
-            wheel.addSymbol(pos, color);
-        }
-
+    
+        ref.addSymbol(pos, color);
+    
         reposition();
         updateJackpot();
         ok = true;
@@ -199,26 +197,18 @@ public class SlotMachine
      */
     public void delSymbol(String symbol)
     {
-        boolean found = false;
-
-        for(Wheel wheel : wheels) {
-            if(wheel.hasColor(symbol)) {
-                found = true;
-            }
-        }
-
-        if(found) {
-            for(Wheel wheel : wheels) {
-                wheel.delSymbol(symbol);
-            }
-
-            reposition();
-            updateJackpot();
-            ok = true;
-        }
-        else {
+        Wheel ref = wheels.isEmpty() ? new Wheel() : wheels.get(0);
+    
+        if(!ref.hasColor(symbol)) {
             fail("No existe el simbolo " + symbol);
+            return;
         }
+    
+        ref.delSymbol(symbol);
+    
+        reposition();
+        updateJackpot();
+        ok = true;
     }
 
     /**
