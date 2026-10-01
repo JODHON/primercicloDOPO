@@ -1,7 +1,11 @@
 #BlueJ class context
+<<<<<<< HEAD
 #Tue Sep 22 18:24:02 COT 2026
+=======
+#Wed Sep 30 19:22:01 COT 2026
+>>>>>>> 44e0ce9 (Simulate y solve de slotMachineContest ya funcionan)
 comment0.target=Circle
-comment0.text=\r\n A Circle that can be manipulated and that draws itself on a canvas.\r\n \r\n @author  Michael Kolling and David J. Barnes (Modified)\r\n @version 1.0  (15 July 2000)()\r\n
+comment0.text=\n A Circle that can be manipulated and that draws itself on a canvas.\n \n @author  Michael Kolling and David J. Barnes (Modified)\n @version 1.0  (15 July 2000)()\n
 comment1.target=Circle()
 comment2.params=newDiameter
 comment2.target=void changeSize(int)

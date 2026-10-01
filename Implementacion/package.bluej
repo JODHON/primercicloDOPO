@@ -1,7 +1,8 @@
 #BlueJ package file
-dependency1.from=Circle
-dependency1.to=Canvas
+dependency1.from=Wheel
+dependency1.to=Circle
 dependency1.type=UsesDependency
+<<<<<<< HEAD
 dependency2.from=SlotMachineContestTest
 dependency2.to=SlotMachineContest
 dependency2.type=UsesDependency
@@ -40,6 +41,46 @@ package.editor.x=0
 package.editor.y=0
 package.frame.height=1048
 package.frame.width=1936
+=======
+dependency2.from=Circle
+dependency2.to=Canvas
+dependency2.type=UsesDependency
+dependency3.from=SlotMachineContestTest
+dependency3.to=SlotMachineContest
+dependency3.type=UsesDependency
+dependency4.from=Rectangle
+dependency4.to=Canvas
+dependency4.type=UsesDependency
+dependency5.from=SlotMachineC2Test
+dependency5.to=SlotMachine
+dependency5.type=UsesDependency
+dependency6.from=SlotMachine
+dependency6.to=Wheel
+dependency6.type=UsesDependency
+dependency7.from=SlotMachine
+dependency7.to=Rectangle
+dependency7.type=UsesDependency
+dependency8.from=SlotMachine
+dependency8.to=Circle
+dependency8.type=UsesDependency
+dependency9.from=SlotMachineContest
+dependency9.to=SlotMachine
+dependency9.type=UsesDependency
+editor.fx.0.height=728
+editor.fx.0.width=800
+editor.fx.0.x=500
+editor.fx.0.y=98
+objectbench.height=311
+objectbench.width=565
+package.divider.horizontal=0.59958071278826
+package.divider.vertical=0.5685210312075983
+package.editor.height=397
+package.editor.width=813
+package.editor.x=341
+package.editor.y=25
+package.frame.height=801
+package.frame.width=974
+>>>>>>> 44e0ce9 (Simulate y solve de slotMachineContest ya funcionan)
 package.numDependencies=9
 package.numTargets=8
 package.showExtends=true
@@ -47,31 +88,43 @@ package.showUses=true
 project.charset=UTF-8
 readme.height=60
 readme.name=@README
-readme.width=49
+readme.width=48
 readme.x=10
 readme.y=10
-target1.height=40
-target1.name=Circle
-target1.naviview.expanded=true
+target1.height=70
+target1.name=Wheel
 target1.showInterface=false
 target1.type=ClassTarget
-target1.width=80
-target1.x=230
-target1.y=290
-target2.height=70
-target2.name=Wheel
+target1.width=120
+target1.x=500
+target1.y=420
+target2.height=40
+target2.name=Circle
+target2.naviview.expanded=true
 target2.showInterface=false
 target2.type=ClassTarget
+<<<<<<< HEAD
 target2.width=120
 target2.x=290
 target2.y=410
+=======
+target2.width=80
+target2.x=230
+target2.y=290
+>>>>>>> 44e0ce9 (Simulate y solve de slotMachineContest ya funcionan)
 target3.height=70
 target3.name=SlotMachineContestTest
 target3.showInterface=false
 target3.type=UnitTestTargetJunit4
+<<<<<<< HEAD
 target3.width=180
 target3.x=890
 target3.y=30
+=======
+target3.width=160
+target3.x=10
+target3.y=80
+>>>>>>> 44e0ce9 (Simulate y solve de slotMachineContest ya funcionan)
 target4.height=40
 target4.name=Canvas
 target4.naviview.expanded=true
@@ -91,6 +144,7 @@ target5.y=50
 target6.height=70
 target6.name=SlotMachine
 target6.showInterface=false
+<<<<<<< HEAD
 target6.type=ClassTarget
 target6.width=120
 target6.x=370
@@ -102,10 +156,29 @@ target7.type=UnitTestTargetJunit4
 target7.width=140
 target7.x=500
 target7.y=200
+=======
+target6.type=UnitTestTargetJunit4
+target6.width=140
+target6.x=690
+target6.y=70
+target7.height=70
+target7.name=SlotMachine
+target7.showInterface=false
+target7.type=ClassTarget
+target7.width=120
+target7.x=370
+target7.y=40
+>>>>>>> 44e0ce9 (Simulate y solve de slotMachineContest ya funcionan)
 target8.height=70
 target8.name=SlotMachineContest
 target8.showInterface=false
 target8.type=ClassTarget
+<<<<<<< HEAD
 target8.width=150
 target8.x=630
 target8.y=90
+=======
+target8.width=140
+target8.x=190
+target8.y=140
+>>>>>>> 44e0ce9 (Simulate y solve de slotMachineContest ya funcionan)

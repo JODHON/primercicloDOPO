@@ -1,5 +1,9 @@
 #BlueJ class context
+<<<<<<< HEAD
 #Tue Sep 22 18:24:02 COT 2026
+=======
+#Wed Sep 30 19:57:56 COT 2026
+>>>>>>> 44e0ce9 (Simulate y solve de slotMachineContest ya funcionan)
 comment0.target=SlotMachineContestTest
 comment1.target=void setUp()
 comment2.target=void tearDown()

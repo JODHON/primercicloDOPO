@@ -1,7 +1,11 @@
 #BlueJ class context
+<<<<<<< HEAD
 #Tue Sep 22 18:24:02 COT 2026
+=======
+#Wed Sep 30 19:22:01 COT 2026
+>>>>>>> 44e0ce9 (Simulate y solve de slotMachineContest ya funcionan)
 comment0.target=SlotMachineC2Test
-comment0.text=\r\n Pruebas de unidad del ciclo 2\: intercambiar ruedas, fijar/soltar ruedas,\r\n girar por pasos y dejar la maquina en una configuracion dada.\r\n\r\n Las pruebas se ejecutan con la maquina en modo invisible.\r\n\r\n @author Jose\r\n
+comment0.text=\n Pruebas de unidad del ciclo 2\: intercambiar ruedas, fijar/soltar ruedas,\n girar por pasos y dejar la maquina en una configuracion dada.\n\n Las pruebas se ejecutan con la maquina en modo invisible.\n\n @author Jose\n
 comment1.target=void setUp()
 comment10.target=void spinWithStepsShouldFailOnLockedWheel()
 comment11.target=void spinWithStepsShouldFailWithNegativeSteps()

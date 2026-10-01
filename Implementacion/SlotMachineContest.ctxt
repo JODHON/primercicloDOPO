@@ -1,4 +1,5 @@
 #BlueJ class context
+<<<<<<< HEAD
 #Tue Sep 22 18:24:02 COT 2026
 comment0.target=SlotMachineContest
 comment1.params=n
@@ -11,3 +12,12 @@ comment3.params=args
 comment3.target=void main(java.lang.String[])
 comment3.text=\r\n Lee la entrada y ejecuta la solucion\r\n
 numComments=4
+=======
+#Wed Sep 30 19:57:50 COT 2026
+comment0.target=SlotMachineContest
+comment1.params=n
+comment1.target=int[][] solve(int)
+comment2.params=n
+comment2.target=void simulate(int)
+numComments=3
+>>>>>>> 44e0ce9 (Simulate y solve de slotMachineContest ya funcionan)
